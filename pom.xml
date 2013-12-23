@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<!--
+ Copyright (c) 2013 by Malte Isberner (https://github.com/misberner).
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+	http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
+	<groupId>com.github.misberner.ap-commons</groupId>
+	<artifactId>ap-commons</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+
+	<name>Annotation Processing Commons</name>
+	<description>
+		A library with common functionalities for facilitating the implementation
+		of Java annotation processors.
+	</description>
+	<url>https://github.com/misberner/ap-commons</url>
+	<inceptionYear>2013</inceptionYear>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+
+	<developers>
+		<developer>
+			<id>misberner</id>
+			<name>Malte Isberner</name>
+			<email>malte.isberner@gmail.com</email>
+			<properties>
+				<picUrl>
+					http://www.gravatar.com/avatar/c44dc4164f1a9a597ec0c24425d1b89d.png
+				</picUrl>
+			</properties>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<url>https://github.com/misberner/ap-commons/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+
+	<!--  =============================== SCM =======================  -->
+	<scm>
+		<connection>scm:git:git@github.com:misberner/ap-commons.git</connection>
+		<developerConnection>scm:git:git@github.com:misberner/ap-commons.git</developerConnection>
+		<url>https://github.com/misberner/ap-commons/tree/master</url>
+	</scm>
+
+	<properties>
+		<javaSourceVersion>1.7</javaSourceVersion>
+		<javaTargetVersion>1.7</javaTargetVersion>
+
+		<compiler-plugin.version>3.1</compiler-plugin.version>
+		<javadoc-plugin.version>2.9.1</javadoc-plugin.version>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${compiler-plugin.version}</version>
+					<configuration>
+						<source>${javaSourceVersion}</source>
+						<target>${javaTargetVersion}</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${javadoc-plugin.version}</version>
+				<reportSets>
+					<reportSet>
+						<id>default</id>
+						<reports>
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+					</reportSet>
+					<reportSet>
+						<id>aggregate</id>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<distributionManagement>
+		<!-- Dummy - this will NOT actually be used, but is required for mvn site:stage -->
+		<!-- Use build-tools/deploy-site.sh for site deployment on GitHub pages -->
+		<site>
+			<id>local</id>
+			<url>file://${user.home}/maven-sites/${project.groupId}-site</url>
+		</site>
+	</distributionManagement>
+
+</project>
