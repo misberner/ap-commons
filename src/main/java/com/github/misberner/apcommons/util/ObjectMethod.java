@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2013 by Malte Isberner (https://github.com/misberner).
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.github.misberner.apcommons.util;
 
 import java.util.List;
@@ -8,8 +23,8 @@ import javax.lang.model.element.VariableElement;
 import com.github.misberner.apcommons.util.TypeUtils.TypeMatcher;
 
 /**
- * Checks whether the specified method is one of the methods declared by the {@link Object} class.
- * Hence, the method returns <code>true</code> if the specified method is one of
+ * Enumeration class to refer to methods defined by {@link Object} in a static manner. The values of
+ * this <tt>enum</tt> correspond to the following methods:
  * <ul>
  * <li>{@link Object#clone()}</li>
  * <li>{@link Object#finalize()}</li>
@@ -24,8 +39,7 @@ import com.github.misberner.apcommons.util.TypeUtils.TypeMatcher;
  * <li>{@link Object#wait(long, int)}</li>
  * </ul>
  * 
- * @param method the method to check
- * @return <tt>true</tt> if this method was declared by {@link Object}, <tt>false</tt> otherwise.
+ * @author Malte Isberner <malte.isberner@gmail.com>
  */
 public enum ObjectMethod {
 	
