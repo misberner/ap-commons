@@ -25,5 +25,5 @@ Resources
 [3]: http://docs.oracle.com/javase/7/docs/api/javax/lang/model/package-summary.html
 [4]: http://docs.oracle.com/javase/7/docs/api/javax/annotation/processing/package-summary.html
 [5]: http://www.apache.org/licenses/LICENSE-2.0.html
-[6]: https://misberner.github.io/ap-commons/maven-site/apidocs/
-[7]: https://misberner.github.io/ap-commons/maven-site/
+[6]: http://misberner.github.io/ap-commons/maven-site/apidocs/
+[7]: http://misberner.github.io/ap-commons/maven-site/
