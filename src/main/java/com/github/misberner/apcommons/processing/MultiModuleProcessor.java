@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 by Malte Isberner (https://github.com/misberner).
+ * Copyright (c) 2013-2014 by Malte Isberner (https://github.com/misberner).
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,12 +54,20 @@ public class MultiModuleProcessor extends AbstractProcessor {
 		this.modules = modules.clone();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see javax.annotation.processing.AbstractProcessor#init(javax.annotation.processing.ProcessingEnvironment)
+	 */
 	@Override
 	public synchronized void init(ProcessingEnvironment processingEnv) {
 		super.init(processingEnv);
 		this.utils = new APUtils(processingEnv);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see javax.annotation.processing.AbstractProcessor#process(java.util.Set, javax.annotation.processing.RoundEnvironment)
+	 */
 	@Override
 	public boolean process(Set<? extends TypeElement> annotations,
 			RoundEnvironment roundEnv) {
@@ -81,6 +89,15 @@ public class MultiModuleProcessor extends AbstractProcessor {
 	}
 	
 	
+	/**
+	 * Dispatch the processing of a {@link SingleAnnotationProcessorModule} during a round of
+	 * annotation processing.
+	 * 
+	 * @param module the module to dispatch
+	 * @param roundEnv the environment for the respective round of annotation processing
+	 * @return <tt>true</tt> if all annotations were processed without error, <tt>false</tt>
+	 * otherwise.
+	 */
 	protected <A extends Annotation> boolean dispatchModule(SingleAnnotationProcessorModule<A> module,
 			RoundEnvironment roundEnv) {
 		assert utils != null;

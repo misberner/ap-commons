@@ -182,7 +182,15 @@ public class NameUtils {
 	}
 	
 	
-	public static String defined(CharSequence ...charSeqs) {
+	/**
+	 * Retrieves the first defined (i.e., non-empty and non-<tt>null</tt>) name
+	 * in the given array, and returns it as a {@link String}.
+	 * 
+	 * @param charSeqs the name array
+	 * @return the first defined name as a {@link String}, or <tt>null</tt> if all
+	 * provided names are undefined.
+	 */
+	public static String firstDefinedName(CharSequence ...charSeqs) {
 		for(CharSequence cs : charSeqs) {
 			if(cs != null && cs.length() > 0) {
 				return cs.toString();
@@ -191,7 +199,11 @@ public class NameUtils {
 		return null;
 	}
 	
-	
+	/**
+	 * 
+	 * @param classes
+	 * @return
+	 */
 	public static String[] getCanonicalNames(Class<?> ...classes) {
 		String[] result = new String[classes.length];
 		for(int i = 0; i < result.length; i++) {

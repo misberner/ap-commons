@@ -372,4 +372,16 @@ public class ElementUtils {
 		return true;
 	}
 	
+	
+	public static boolean checkElementKind(Element elem, ElementKind ...acceptedKinds) {
+		ElementKind ek = elem.getKind();
+		for(ElementKind ak : acceptedKinds) {
+			if(ek == ak) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
 }

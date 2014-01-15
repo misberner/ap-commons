@@ -27,6 +27,7 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 
+// TODO Documentation
 public class TypeUtils {
 	
 	public static interface TypeMatcher {

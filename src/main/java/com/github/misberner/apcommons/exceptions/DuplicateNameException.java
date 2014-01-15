@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 by Malte Isberner (https://github.com/misberner).
+ * Copyright (c) 2013-2014 by Malte Isberner (https://github.com/misberner).
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,9 @@
  */
 package com.github.misberner.apcommons.exceptions;
 
+
 /**
- * Exception to indicate that a unique by-name mapping could not
+ * Indicates that a unique by-name mapping could not
  * be obtained, as there are duplicate names for different elements
  * in the provided collection of elements.
  * 

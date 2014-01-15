@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 by Malte Isberner (https://github.com/misberner).
+ * Copyright (c) 2013-2014 by Malte Isberner (https://github.com/misberner).
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,6 +63,10 @@ public class CheckEnclosingAnnotatedProcessor<A extends Annotation> extends Abst
 		this.expectedAnnotations = expectedAnnotations.clone();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.github.misberner.apcommons.processing.AbstractSingleAnnotationProcessor#process(javax.lang.model.element.Element, javax.lang.model.element.AnnotationMirror, java.lang.annotation.Annotation, com.github.misberner.apcommons.util.APUtils)
+	 */
 	@Override
 	public void process(Element elem, AnnotationMirror annotation, A annotationObject, APUtils utils)
 			throws Exception, ProcessingException {

@@ -23,6 +23,12 @@ import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
 import javax.tools.Diagnostic.Kind;
 
+/**
+ * A {@link Reporter} that prints messages associated with a specific {@link Element}.
+ * 
+ * @author Malte Isberner <malte.isberner@gmail.com>
+ *
+ */
 public class ElementReporter extends RootReporter {
 
 	protected final Element element;
