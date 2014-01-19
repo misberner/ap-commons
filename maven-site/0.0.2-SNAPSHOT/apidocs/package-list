@@ -1,0 +1,8 @@
+com.github.misberner.apcommons.exceptions
+com.github.misberner.apcommons.processing
+com.github.misberner.apcommons.processing.exceptions
+com.github.misberner.apcommons.reporting
+com.github.misberner.apcommons.util
+com.github.misberner.apcommons.util.annotations
+com.github.misberner.apcommons.util.methods
+com.github.misberner.apcommons.util.types
