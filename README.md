@@ -16,6 +16,6 @@ License
 
 Resources
 --------------------
-* API Documentation (Javadoc): [release](https://misberner.github.io/ap-commons/maven-site/latest-release/apidocs/) | [snapshot](https://misberner.github.io/ap-commons/maven-site/latest-snapshot/apidocs/)
-* Maven Project Site: [relase](https://misberner.github.io/ap-commons/maven-site/latest-release/) | [snapshot](https://misberner.github.io/ap-commons/maven-site/latest-snapshot/)
+* API Documentation (Javadoc): [release](http://misberner.github.io/ap-commons/maven-site/latest-release/apidocs/) ([no frames](http://misberner.github.io/ap-commons/maven-site/latest-release/apidocs/overview-summary.html)) | [snapshot](http://misberner.github.io/ap-commons/maven-site/latest-snapshot/apidocs/) ([no frames](http://misberner.github.io/ap-commons/maven-site/latest-snapshot/apidocs/overview-summary.html))
+* Maven Project Site: [relase](http://misberner.github.io/ap-commons/maven-site/latest-release/) | [snapshot](http://misberner.github.io/ap-commons/maven-site/latest-snapshot/)
 
