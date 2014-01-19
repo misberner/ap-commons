@@ -24,7 +24,7 @@ import javax.tools.Diagnostic.Kind;
 
 import com.github.misberner.apcommons.processing.exceptions.ProcessingException;
 import com.github.misberner.apcommons.util.APUtils;
-import com.github.misberner.apcommons.util.ElementUtils;
+import com.github.misberner.apcommons.util.annotations.AnnotationUtils;
 
 /**
  * Checks whether the enclosing element of an annotated element is also
@@ -70,7 +70,7 @@ public class CheckEnclosingAnnotatedProcessor<A extends Annotation> extends Abst
 	@Override
 	public void process(Element elem, AnnotationMirror annotation, A annotationObject, APUtils utils)
 			throws Exception, ProcessingException {
-		if(!ElementUtils.isEnclosingAnnotated(elem, onlyDirect, expectedAnnotations)) {
+		if(!AnnotationUtils.isEnclosingAnnotated(elem, onlyDirect, expectedAnnotations)) {
 			String verb = (diagnosticKind == Kind.ERROR) ? "must" : "should";
 			StringBuilder sb = new StringBuilder();
 			TypeElement te = (TypeElement)annotation.getAnnotationType().asElement();

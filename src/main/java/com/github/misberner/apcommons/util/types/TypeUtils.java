@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 by Malte Isberner (https://github.com/misberner).
+ * Copyright (c) 2013-2014 by Malte Isberner (https://github.com/misberner).
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.misberner.apcommons.util;
+package com.github.misberner.apcommons.util.types;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.ArrayType;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
+import javax.lang.model.util.ElementFilter;
 
 // TODO Documentation
 public class TypeUtils {
@@ -222,6 +229,88 @@ public class TypeUtils {
 		return matchers;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * Checks if the type represented by the given element can be instantiated. This requires
+	 * the type to be a non-abstract class.
+	 * <p>
+	 * Note that this method does not check whether the class actually exposes any visible
+	 * constructors.
+	 * 
+	 * @param elem the type element to check
+	 * @return {@code true} if the type is a non-abstract class, {@code false} otherwise
+	 */
+	public static boolean isInstantiable(TypeElement elem) {
+		if(elem.getKind() == ElementKind.INTERFACE || elem.getModifiers().contains(Modifier.ABSTRACT)) {
+			return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * Checks if the type represented by the given element can be instantiated
+	 * on a stand-alone basis. This requires the type to be a non-abstract class
+	 * which is defined either at package level, or, if it is an inner class,
+	 * with a {@code static} modifier.
+	 * <p>
+	 * Note that like the above {@link #isInstantiable(TypeElement)}, this method does not
+	 * check if the class actually exposes any visible constructors.
+	 * 
+	 * @param elem the type element to check
+	 * @return {@code true} if this type is stand-alone instantiable, {@code false}
+	 * otherwise.
+	 */
+	public static boolean isStandaloneInstantiable(TypeElement elem) {
+		if(!isInstantiable(elem)) {
+			return false;
+		}
+		
+		Element enclosing = elem.getEnclosingElement();
+		if(enclosing.getKind() == ElementKind.PACKAGE) {
+			// top-level class
+			return true;
+		}
+		
+		// only static inner classes are instantiable
+		return elem.getModifiers().contains(Modifier.STATIC);
+	}
+	
+	
+	/**
+	 * Retrieves all directly declared methods of a given type.
+	 * 
+	 * @param typeElem the type element
+	 * @return a list of all directly declared methods of the given type
+	 */
+	public static List<ExecutableElement> getDeclaredMethods(TypeElement typeElem) {
+		return ElementFilter.methodsIn(typeElem.getEnclosedElements());
+	}
+	
+	/**
+	 * Retrieves all directly declared fields of a given type.
+	 * 
+	 * @param typeElem the type element
+	 * @return a list of all directly declared fields of the given type
+	 */
+	public static List<VariableElement> getDeclaredFields(TypeElement typeElem) {
+		return ElementFilter.fieldsIn(typeElem.getEnclosedElements());
+	}
+	
+	/**
+	 * Retrieves all constructors of a given class.
+	 * 
+	 * @param typeElem the type element for the class
+	 * @return a list of all constructors of the specified class
+	 */
+	public static List<ExecutableElement> getConstructors(TypeElement typeElem) {
+		return ElementFilter.constructorsIn(typeElem.getEnclosedElements());
+	}
 	
 
 }

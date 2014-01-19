@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 by Malte Isberner (https://github.com/misberner).
+ * Copyright (c) 2013-2014 by Malte Isberner (https://github.com/misberner).
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -172,12 +172,17 @@ public class NameUtils {
 			return packageNameSpec.toString();
 		}
 		
+		CharSequence subPkg = packageNameSpec.subSequence(1, packageNameSpec.length());
+		
+		if(subPkg.length() == 0) {
+			return referencePackage.toString();
+		}
 		if(referencePackage.length() == 0) {
-			return packageNameSpec.subSequence(1, packageNameSpec.length()).toString();
+			return subPkg.toString();
 		}
 		
-		StringBuilder sb = new StringBuilder(referencePackage.length() + packageNameSpec.length());
-		sb.append(referencePackage).append(packageNameSpec);
+		StringBuilder sb = new StringBuilder(referencePackage.length() + subPkg.length());
+		sb.append(referencePackage).append('.').append(subPkg);
 		return sb.toString();
 	}
 	

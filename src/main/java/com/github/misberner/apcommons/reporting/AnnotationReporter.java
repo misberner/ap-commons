@@ -23,7 +23,7 @@ import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.Element;
 import javax.tools.Diagnostic.Kind;
 
-import com.github.misberner.apcommons.util.ElementUtils;
+import com.github.misberner.apcommons.util.annotations.AnnotationUtils;
 
 /**
  * Reporter that by default prints messages associated with a certain annotation
@@ -52,13 +52,13 @@ public class AnnotationReporter extends ElementReporter {
 	public AnnotationReporter(ProcessingEnvironment processingEnv,
 			Element element, CharSequence annotationName) {
 		super(processingEnv, element);
-		this.annotation = ElementUtils.findAnnotationMirror(element, annotationName);
+		this.annotation = AnnotationUtils.findAnnotationMirror(element, annotationName);
 	}
 	
 	public AnnotationReporter(ProcessingEnvironment processingEnv,
 			Element element, Class<? extends Annotation> annotationClazz) {
 		super(processingEnv, element);
-		this.annotation = ElementUtils.findAnnotationMirror(element, annotationClazz);
+		this.annotation = AnnotationUtils.findAnnotationMirror(element, annotationClazz);
 	}
 	
 	

@@ -15,6 +15,8 @@
  */
 package com.github.misberner.apcommons.processing;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +32,7 @@ import javax.tools.Diagnostic.Kind;
 import com.github.misberner.apcommons.processing.exceptions.FatalProcessingException;
 import com.github.misberner.apcommons.processing.exceptions.ProcessingException;
 import com.github.misberner.apcommons.util.APUtils;
-import com.github.misberner.apcommons.util.ElementUtils;
+import com.github.misberner.apcommons.util.annotations.AnnotationUtils;
 
 /**
  * An annotation processor that sequentially dispatches multiple
@@ -116,7 +118,7 @@ public class MultiModuleProcessor extends AbstractProcessor {
 			
 			for(Element e : annotatedElements) {
 				AnnotationMirror annotationMirror
-					= ElementUtils.findAnnotationMirror(e, annotationType);
+					= AnnotationUtils.findAnnotationMirror(e, annotationType);
 				
 				if(annotationMirror == null) {
 					// Something is REALLY wrong 
@@ -159,6 +161,10 @@ public class MultiModuleProcessor extends AbstractProcessor {
 		catch(Exception ex) {
 			utils.getMessager().printMessage(Kind.ERROR, "Exception during annotation processing: "
 					+ ex.getMessage());
+			StringWriter sw = new StringWriter();
+			ex.printStackTrace(new PrintWriter(sw));
+			utils.getMessager().printMessage(Kind.ERROR, "Stack trace:");
+			utils.getMessager().printMessage(Kind.ERROR, sw.toString());
 			noError = false;
 		}
 		

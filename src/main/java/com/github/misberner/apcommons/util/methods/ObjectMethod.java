@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 by Malte Isberner (https://github.com/misberner).
+ * Copyright (c) 2013-2014 by Malte Isberner (https://github.com/misberner).
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.misberner.apcommons.util;
+package com.github.misberner.apcommons.util.methods;
 
 import java.util.List;
 
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.VariableElement;
 
-import com.github.misberner.apcommons.util.TypeUtils.TypeMatcher;
+import com.github.misberner.apcommons.util.types.TypeUtils;
+import com.github.misberner.apcommons.util.types.TypeUtils.TypeMatcher;
 
 /**
  * Enumeration class to refer to methods defined by {@link Object} in a static manner. The values of
@@ -43,7 +44,7 @@ import com.github.misberner.apcommons.util.TypeUtils.TypeMatcher;
  */
 public enum ObjectMethod {
 	
-	CLONE("clone", null),
+	CLONE("clone", Object.class),
 	FINALIZE("finalize", void.class),
 	GET_CLASS("getClass", Class.class),
 	HASH_CODE("hashCode", int.class),
@@ -154,7 +155,7 @@ public enum ObjectMethod {
 			return false;
 		}
 		
-		return ElementUtils.checkSignature(ee, returnTypeMatcher, paramTypeMatchers);
+		return MethodUtils.checkSignature(ee, returnTypeMatcher, paramTypeMatchers);
 	}
 
 	

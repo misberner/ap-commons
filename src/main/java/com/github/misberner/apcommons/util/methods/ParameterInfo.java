@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.misberner.apcommons.util;
+package com.github.misberner.apcommons.util.methods;
 
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.ArrayType;

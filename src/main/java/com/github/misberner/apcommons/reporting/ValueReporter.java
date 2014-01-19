@@ -23,7 +23,7 @@ import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.Element;
 import javax.tools.Diagnostic.Kind;
 
-import com.github.misberner.apcommons.util.ElementUtils;
+import com.github.misberner.apcommons.util.annotations.AnnotationUtils;
 
 public class ValueReporter extends AnnotationReporter {
 	
@@ -39,19 +39,19 @@ public class ValueReporter extends AnnotationReporter {
 	public ValueReporter(ProcessingEnvironment processingEnv, Element element,
 			AnnotationMirror annotation, CharSequence valueName) {
 		super(processingEnv, element, annotation);
-		this.value = ElementUtils.findAnnotationValue(super.annotation, valueName);
+		this.value = AnnotationUtils.findAnnotationValue(super.annotation, valueName);
 	}
 	
 	public ValueReporter(ProcessingEnvironment processingEnv, Element element,
 			CharSequence annotationName, CharSequence valueName) {
 		super(processingEnv, element, annotationName);
-		this.value = ElementUtils.findAnnotationValue(super.annotation, valueName);
+		this.value = AnnotationUtils.findAnnotationValue(super.annotation, valueName);
 	}
 	
 	public ValueReporter(ProcessingEnvironment processingEnv, Element element,
 			Class<? extends Annotation> annotationClazz, CharSequence valueName) {
 		super(processingEnv, element, annotationClazz);
-		this.value = ElementUtils.findAnnotationValue(super.annotation, valueName);
+		this.value = AnnotationUtils.findAnnotationValue(super.annotation, valueName);
 	}
 
 	/*
