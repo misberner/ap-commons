@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2013-2014 by Malte Isberner (https://github.com/misberner).
- * 
+ *
+ * Copyright (c) 2014 by Malte Isberner (https://github.com/misberner).
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.github.misberner.apcommons.util;
 
 import java.util.ArrayList;

@@ -1,6 +1,7 @@
 /*
- * Copyright (c) 2013-2014 by Malte Isberner (https://github.com/misberner).
- * 
+ *
+ * Copyright (c) 2014 by Malte Isberner (https://github.com/misberner).
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -224,6 +225,116 @@ public class NameUtils {
 			result[i+1] = otherClasses[i].getCanonicalName();
 		}
 		return result;
+	}
+	
+	
+	public static boolean isJavaIdentifier(CharSequence cs) {
+		int len = cs.length();
+		
+		if(len == 0) {
+			return false;
+		}
+		
+		if(Character.isJavaIdentifierStart(cs.charAt(0))) {
+			return false;
+		}
+		
+		for(int i = 1; i < len; i++) {
+			if(!Character.isJavaIdentifierPart(cs.charAt(i))) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public static boolean isSimpleJavaIdentifierStart(char c) {
+		return Character.isAlphabetic(c) || (c == '_');
+	}
+	
+	public static boolean isSimpleJavaIdentifierPart(char c) {
+		return Character.isAlphabetic(c) || Character.isDigit(c) || (c == '_');
+	}
+	
+	public static boolean isSimpleJavaIdentifier(CharSequence cs) {
+		int len = cs.length();
+		
+		if(len == 0) {
+			return false;
+		}
+		
+		if(!isSimpleJavaIdentifierStart(cs.charAt(0))) {
+			return false;
+		}
+		
+		for(int i = 1; i < len; i++) {
+			if(!isSimpleJavaIdentifierPart(cs.charAt(i))) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	
+	public static boolean isValidPackageName(CharSequence cs) {
+		int len = cs.length();
+		
+		if(len == 0) {
+			return true;
+		}
+		
+		boolean compStart = true;
+		for(int i = 0; i < len; i++) {
+			char c = cs.charAt(i);
+			if(compStart == true) {
+				if(!Character.isJavaIdentifierStart(c)) {
+					return false;
+				}
+				compStart = false;
+			}
+			else if(c == '.') {
+				compStart = true;
+			}
+			else if(!Character.isJavaIdentifierPart(c)) {
+				return false;
+			}
+		}
+		
+		return !compStart;
+	}
+	
+	public static boolean isValidPackageReference(CharSequence cs) {
+		int len = cs.length();
+		
+		if(len == 0) {
+			return true;
+		}
+		
+		if(cs.charAt(0) == '.') {
+			cs = cs.subSequence(1, len);
+		}
+		
+		return isValidPackageName(cs);
+	}
+
+	public static String camelCase(CharSequence... components) {
+		StringBuilder sb = new StringBuilder();
+		
+		boolean start = true;
+		for(CharSequence comp : components) {
+			if(comp != null && comp.length() == 0) {
+				if(start) {
+					sb.append(comp);
+					start = false;
+				}
+				else {
+					sb.append(capitalizeFirst(comp));
+				}
+			}
+		}
+		
+		return sb.toString();
 	}
 
 }
