@@ -71,11 +71,16 @@
 	</scm>
 
 	<properties>
-		<javaSourceVersion>1.7</javaSourceVersion>
-		<javaTargetVersion>1.7</javaTargetVersion>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.source.version>1.7</java.source.version>
+		<java.target.version>1.7</java.target.version>
 
 		<compiler-plugin.version>3.1</compiler-plugin.version>
 		<javadoc-plugin.version>2.9.1</javadoc-plugin.version>
+		<site-plugin.version>3.3</site-plugin.version>
+		<exec-plugin.version>1.2.1</exec-plugin.version>
+
+		<deploy-site-github.exec>deploy-site-github</deploy-site-github.exec>
 	</properties>
 
 	<build>
@@ -86,12 +91,86 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>${compiler-plugin.version}</version>
 					<configuration>
-						<source>${javaSourceVersion}</source>
-						<target>${javaTargetVersion}</target>
+						<source>${java.source.version}</source>
+						<target>${java.target.version}</target>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${site-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>attach-descriptor</id>
+							<goals>
+								<goal>attach-descriptor</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>default-site</id>
+							<configuration>
+								<skip>true</skip>
+							</configuration>
+						</execution>
+					</executions>
+					<configuration>
+						<skipDeploy>true</skipDeploy>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<configuration>
+						<!-- Automatically use the parent version for all submodules, do not prompt for each one -->
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<!-- Perform an install into the local repository, otherwise the javadoc plugin and archetype integration tests will fail -->
+						<preparationGoals>clean install</preparationGoals>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>${exec-plugin.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<!-- Deploy site @ GitHub pages -->
+					<!--
+						Note: In order to be able to deploy the Maven site,
+						you need the script deploy-site-github to reside
+						in your PATH, or manually specify the path to the
+						executable script using the "deploy-site-github.exec"
+						property.
+						You can download the shell script from this URL:
+						https://raw.github.com/misberner/shell-scripts/master/maven/deploy-site-github.sh
+					-->
+					<execution>
+						<id>deploy-site-github</id>
+						<inherited>false</inherited>
+						<phase>site-deploy</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>${deploy-site-github.exec}</executable>
+							<workingDirectory>${project.basedir}</workingDirectory>
+							<arguments>
+								<argument>-p</argument> <!-- Purge contents before copying -->
+								<argument>-P/maven-site</argument>
+								<argument>-V</argument>
+								<argument>-l</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 
 	<reporting>
